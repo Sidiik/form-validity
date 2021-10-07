@@ -6,39 +6,44 @@ import * as Yub from "yup";
 const Signup = () => {
   const validate = Yub.object({
     email: Yub.string()
-      .email("Must be valid email")
+      .email("Email must be valid")
       .required("Email is required"),
     password: Yub.string()
-      .min(6, "Password must be 7 chars long")
-      .required("Password is required"),
-    confPass: Yub.string()
+      .min(6, "Password must be 6 chars long")
+      .required("Required"),
+    passwordConfirm: Yub.string()
       .oneOf([Yub.ref("password"), null], "Passwords must much")
-      .required("Password confirmation is required"),
+      .required("Required"),
   });
+
   return (
     <Formik
       initialValues={{
         email: "",
         password: "",
-        confPass: "",
+        passwordConfirm: "",
       }}
       validationSchema={validate}
     >
       {(formik) => (
-        <div className="container">
-          <h1>Sign up now</h1>
-
-          <Form>
-            <TextField label="Email address" name="email" type="email" />
-            <TextField label="Password" name="password" type="password" />
-            <TextField
-              label="Confirm password"
-              name="confPass"
-              type="password"
-            />
-            <button className="btn btn-primary mt-3"> Register </button>
-          </Form>
-        </div>
+        <Form>
+          <h1>Sign up</h1>
+          <TextField name="email" type="email" label="Email address" />
+          <TextField name="password" type="password" label="Password" />
+          <TextField
+            name="passwordConfirm"
+            type="password"
+            label="Password confirmation"
+          />
+          <button className="btn btn-primary mt-3">Register now</button>
+          <button
+            className="btn btn-danger mt-3"
+            type="reset"
+            style={{ marginLeft: "1rem" }}
+          >
+            Reset
+          </button>
+        </Form>
       )}
     </Formik>
   );
