@@ -1,9 +1,11 @@
 import { Form, Formik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import TextField from "./TextField";
 import * as Yub from "yup";
 
 const Signup = () => {
+  const [userData, setUserData] = useState(null);
+  console.log("Data", userData);
   const validate = Yub.object({
     email: Yub.string()
       .email("Email must be valid")
@@ -24,6 +26,9 @@ const Signup = () => {
         passwordConfirm: "",
       }}
       validationSchema={validate}
+      onSubmit={(values) => {
+        return setUserData(values);
+      }}
     >
       {(formik) => (
         <Form>
