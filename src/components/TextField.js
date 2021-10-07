@@ -9,11 +9,12 @@ const TextField = ({ label, ...props }) => {
       <input
         {...props}
         {...field}
+        autoComplete="off"
         className={`form-control shadow-none ${
           meta.touched && meta.error && "is-invalid"
         }`}
       />
-      <ErrorMessage name={field.name} />
+      <ErrorMessage component="p" className="text-danger" name={field.name} />
     </div>
   );
 };
